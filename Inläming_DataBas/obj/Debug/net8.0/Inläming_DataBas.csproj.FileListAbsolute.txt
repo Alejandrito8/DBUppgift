@@ -150,3 +150,4 @@ C:\Users\aleks\source\repos\Development\Newton Projects\Inläming_DataBas\Inläm
 C:\Users\aleks\source\repos\Development\Newton Projects\Inläming_DataBas\Inläming_DataBas\obj\Debug\net8.0\Inläming_DataBas.pdb
 C:\Users\aleks\source\repos\Development\Newton Projects\Inläming_DataBas\Inläming_DataBas\obj\Debug\net8.0\Inläming_DataBas.genruntimeconfig.cache
 C:\Users\aleks\source\repos\Development\Newton Projects\Inläming_DataBas\Inläming_DataBas\obj\Debug\net8.0\ref\Inläming_DataBas.dll
+C:\Users\aleks\source\repos\Development\Newton Projects\Inläming_DataBas\Inläming_DataBas\obj\Debug\net8.0\Inläming_DataBas.sourcelink.json
