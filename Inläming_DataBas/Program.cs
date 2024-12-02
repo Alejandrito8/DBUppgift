@@ -12,9 +12,10 @@ class Program
         {
             System.Console.WriteLine("What do you want to do?");
             System.Console.WriteLine("1. Add Data");
-            System.Console.WriteLine("2. Update data");
-            System.Console.WriteLine("3. Delete data");
-            System.Console.WriteLine("4. Quit");
+            System.Console.WriteLine("2. Update Data");
+            System.Console.WriteLine("3. Delete Data");
+            System.Console.WriteLine("4. List Data");
+            System.Console.WriteLine("5. Quit");
             var input = Console.ReadLine();
             switch (input)
             {
@@ -22,7 +23,8 @@ class Program
                     System.Console.WriteLine("What data do you want to add?");
                     System.Console.WriteLine("1. Add an Author");
                     System.Console.WriteLine("2. Add a book");
-                    System.Console.WriteLine("3. Quit");
+                    System.Console.WriteLine("3. Add a bookloan");
+                    System.Console.WriteLine("4. Quit");
                     var input1 = Console.ReadLine();
                     {
                         if (input1 == "1")
@@ -36,6 +38,11 @@ class Program
                         }
                         else if (input1 == "3")
                         {
+                            AddData.CreateBookloan();
+                            break;
+                        }
+                        else if (input1 == "4")
+                        {
                             System.Console.WriteLine("Exiting program");
                             return;
                         }
@@ -48,10 +55,9 @@ class Program
                     break;
 
                 case "2":
-
                     System.Console.WriteLine("What data do you want to update?");
                     System.Console.WriteLine("1. Update Book & Author relation");
-                    System.Console.WriteLine("2. Update Book & Borrower ");
+                    System.Console.WriteLine("2. Update Bookloan & Borrower");
                     System.Console.WriteLine("3. Quit");
                     var input2 = Console.ReadLine();
 
@@ -81,7 +87,7 @@ class Program
                     System.Console.WriteLine("What data do you want to Delete?");
                     System.Console.WriteLine("1. Delete Author");
                     System.Console.WriteLine("2. Delete Book");
-                    System.Console.WriteLine("3. Delete Borrower");
+                    System.Console.WriteLine("3. Delete bookloan");
                     System.Console.WriteLine("4. Quit");
                     var input3 = Console.ReadLine();
 
@@ -97,7 +103,7 @@ class Program
                     }
                     else if (input3 == "3")
                     {
-                        DeleteData.DeleteBorrower();
+                        DeleteData.DeleteBookloan();
                         break;
                     }
                     else if (input3 == "4")
@@ -112,6 +118,46 @@ class Program
                     }
 
                 case "4":
+                    System.Console.WriteLine("What data do you want to List?");
+                    System.Console.WriteLine("1. List books and authors");
+                    System.Console.WriteLine("2. List loaned books");
+                    System.Console.WriteLine("3. List books by one author");
+                    System.Console.WriteLine("4. List every author for one book");
+                    System.Console.WriteLine("5. Quit");
+                    var input4 = Console.ReadLine();
+
+                    if (input4 == "1")
+                    {
+                        ListData.ListBooksAndAuthors();
+                        break;
+                    }
+                    else if (input4 == "2")
+                    {
+                        ListData.ListLoanedBooks();
+                        break;
+                    }
+                    else if (input4 == "3")
+                    {
+                        ListData.ListBooksByAuthor();
+                        break;
+                    }
+                    else if (input4 == "4")
+                    {
+                        ListData.ListAuthorsForBook();
+                        break;
+                    }
+                    else if (input4 == "5")
+                    {
+                        System.Console.WriteLine("Exiting program");
+                        return;
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("Oops... A problem occured");
+                        break;
+                    }
+
+                case "5":
                     System.Console.WriteLine("Exiting program");
                     return;
 

@@ -82,6 +82,13 @@ public class AddData
             }
         }
     }
+        public static void CreateBookloan()
+    {
+        using (var context = new AppDbContext())
+        {
+
+        }
+    }
 }
 
 

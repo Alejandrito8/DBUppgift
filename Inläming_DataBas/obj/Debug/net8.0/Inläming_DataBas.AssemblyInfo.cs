@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Inläming_DataBas")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0445352b1a9672734969b538afbea0529a034e36")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("Inläming_DataBas")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Inläming_DataBas")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
