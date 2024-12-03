@@ -11,31 +11,34 @@ public class UppdateData
             {
                 using (var transaction = context.Database.BeginTransaction())
                 {
-                System.Console.WriteLine("Enter the title of the book");
-                string title = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(title))
-                {
-                    throw new ArgumentException("Title cannot be empty");
-                }
-                    var book = context.Books.FirstOrDefault(b => b.Title.ToLower() == bookTitle.ToLower());
+                    System.Console.WriteLine("Enter the title of the book");
+                    string title = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(title))
+                    {
+                        throw new ArgumentException("Title cannot be empty");
+                    }
+                    var book = context.Books.FirstOrDefault(b => b.Title.ToLower() == title.ToLower());
                     if (book == null)
                     {
-                        Console.WriteLine($"No book found with the name '{bookTitle}', but you can add it to the collection under 'add data' in the menu.");
+                        Console.WriteLine($"No book found with the title '{title}', but you can add it to the collection under 'add data' in the menu.");
                         return;
                     }
-                System.Console.WriteLine("Enter the first name for the author");
-                string firstName = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(firstName))
-                {
-                    throw new ArgumentException("First name cannot be empty");
-                }
-                Console.WriteLine("Enter the last name of the author");
-                string lastName = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(lastName))
-                {
-                    throw new ArgumentException("Last name cannot be empty");
-                }
-                 if (book == null)
+                    System.Console.WriteLine("Enter the first name for the author");
+                    string firstName = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(firstName))
+                    {
+                        throw new ArgumentException("First name cannot be empty");
+                    }
+                    Console.WriteLine("Enter the last name of the author");
+                    string lastName = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(lastName))
+                    {
+                        throw new ArgumentException("Last name cannot be empty");
+                    }
+                    var author = context.Authors
+                        .FirstOrDefault(a => a.FirstName.ToLower() == firstName.ToLower() &&
+                                             a.LastName.ToLower() == lastName.ToLower());
+                    if (book == null)
                     {
                         Console.WriteLine($"No author found with the name '{firstName}' '{lastName}', but you can add the new author to the collection under 'add data' in the menu.");
                         return;
@@ -43,6 +46,8 @@ public class UppdateData
 
                     var bookAuthor = new BookAuthor
                     {
+                        Book = book,
+                        Author = author,
                         BookID = book.ID,
                         AuthorID = author.ID
                     };
@@ -71,14 +76,14 @@ public class UppdateData
 
                 if (string.IsNullOrWhiteSpace(borrowerFirstName))
                 {
-                   throw new ArgumentException("First name cannot be empty");
+                    throw new ArgumentException("First name cannot be empty");
                 }
                 Console.WriteLine("Enter the last name of the borrower:");
                 string borrowerLastName = Console.ReadLine();
 
                 if (string.IsNullOrWhiteSpace(borrowerLastName))
                 {
-                        throw new ArgumentException("Last name cannot be empty");
+                    throw new ArgumentException("Last name cannot be empty");
                 }
                 Console.WriteLine("Enter the name of the book to borrow:");
                 string bookName = Console.ReadLine();
@@ -104,7 +109,7 @@ public class UppdateData
 
                 if (book == null)
                 {
-                    Console.WriteLine($"No book found with the name '{bookName}', but you can add it to the collection under 'add data' in the menu.");
+                    Console.WriteLine($"No book found with the title '{bookName}', but you can add it to the collection under 'add data' in the menu.");
                     return;
                 }
 

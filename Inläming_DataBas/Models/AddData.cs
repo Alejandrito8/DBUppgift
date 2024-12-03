@@ -93,21 +93,21 @@ public class AddData
 
                 if (string.IsNullOrWhiteSpace(borrowerFirstName))
                 {
-                    throw new ArgumentException("First name cannot be empty")
+                    throw new ArgumentException("First name cannot be empty");
                 }
                 Console.WriteLine("Enter the last name of the borrower:");
                 string borrowerLastName = Console.ReadLine();
 
                 if (string.IsNullOrWhiteSpace(borrowerLastName))
                 {
-                   throw new ArgumentException("Last name cannot be empty")
+                    throw new ArgumentException("Last name cannot be empty");
                 }
                 Console.WriteLine("Enter the name of the book to borrow:");
                 string bookName = Console.ReadLine();
 
                 if (string.IsNullOrWhiteSpace(bookName))
                 {
-                    throw new ArgumentException("book title cannot be empty")
+                    throw new ArgumentException("book title cannot be empty");
                 }
 
                 Console.WriteLine("Enter the loan start date (YYYY-MM-DD):");
@@ -119,13 +119,12 @@ public class AddData
                 Console.WriteLine("Enter the loan return date (YYYY-MM-DD):");
                 if (!DateTime.TryParse(Console.ReadLine(), out DateTime returnDate))
                 {
-                   throw new ArgumentException("Invalid date format. Please use yyyy-mm-dd");
+                    throw new ArgumentException("Invalid date format. Please use yyyy-mm-dd");
                 }
                 var loan = new Loan
                 {
                     BorrowerFirstName = borrowerFirstName,
                     BorrowerLastName = borrowerLastName,
-                    BookID = book.ID,
                     LoanDate = loanDate,
                     ReturnDate = returnDate
                 };
@@ -133,7 +132,7 @@ public class AddData
                 context.Loans.Add(loan);
                 context.SaveChanges();
 
-                Console.WriteLine($"Book '{book.Title}' has been loaned from {loanDate.ToShortDateString()} to {returnDate.ToShortDateString()}.");
+                Console.WriteLine($"Book '{bookName}' has been loaned from {loanDate.ToShortDateString()} to {returnDate.ToShortDateString()}.");
             }
         }
         catch (Exception ex)
@@ -141,8 +140,8 @@ public class AddData
             Console.WriteLine($"Error: {ex.Message}");
         }
     }
-        
-    }
+
+}
 
 
 
