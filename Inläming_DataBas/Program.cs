@@ -7,6 +7,7 @@ class Program
 {
     static void Main(string[] args)
     {
+        
         bool Menu = true;
         while (Menu)
         {
@@ -35,6 +36,7 @@ class Program
                         else if (input1 == "2")
                         {
                             AddData.CreateBook();
+                            break;
                         }
                         else if (input1 == "3")
                         {
@@ -60,7 +62,6 @@ class Program
                     System.Console.WriteLine("2. Update Bookloan & Borrower");
                     System.Console.WriteLine("3. Quit");
                     var input2 = Console.ReadLine();
-
 
                     if (input2 == "1")
                     {

@@ -95,7 +95,11 @@ namespace Inläming_DataBas.Migrations
                     b.Property<int>("BookID")
                         .HasColumnType("int");
 
-                    b.Property<string>("BorrowerName")
+                    b.Property<string>("BorrowerFirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BorrowerLastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

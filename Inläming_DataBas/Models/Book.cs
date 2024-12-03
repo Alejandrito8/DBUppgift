@@ -11,6 +11,6 @@ namespace Inlämning_DataBas.Models
 
         // Relation till många författare (via BookAuthor)
         public ICollection<BookAuthor> BookAuthors { get; set; }
-        public ICollection<Loan> Loans { get; set; } // property för Loans tjo
+        public ICollection<Loan> Loans { get; set; } // property för Loans 
     }
 }

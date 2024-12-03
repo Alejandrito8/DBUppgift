@@ -72,7 +72,8 @@ namespace Inläming_DataBas.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BookID = table.Column<int>(type: "int", nullable: false),
-                    BorrowerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BorrowerFirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BorrowerLastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LoanDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DueDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ReturnDate = table.Column<DateTime>(type: "datetime2", nullable: true)

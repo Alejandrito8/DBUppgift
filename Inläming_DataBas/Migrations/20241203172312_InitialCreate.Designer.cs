@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Inläming_DataBas.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241127073840_InitialCreate")]
+    [Migration("20241203172312_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -98,7 +98,11 @@ namespace Inläming_DataBas.Migrations
                     b.Property<int>("BookID")
                         .HasColumnType("int");
 
-                    b.Property<string>("BorrowerName")
+                    b.Property<string>("BorrowerFirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BorrowerLastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
