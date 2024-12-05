@@ -18,34 +18,40 @@ class Program
                 System.Console.WriteLine("3. Delete Data");
                 System.Console.WriteLine("4. List Data");
                 System.Console.WriteLine("5. Quit");
-                var input = Console.ReadLine();
+                var input = Console.ReadLine()?.Trim().ToLower();
                 switch (input)
                 {
                     case "1":
                     {
+                        Console.Clear();
                         MenuData.HandleData();
                         break;
                     }
                     case "2":
                     {
+                        Console.Clear();
                         MenuData.HandleUpdateData();
                         break;
                     }
                     case "3":
                     {
+                        Console.Clear();
                         MenuData.HandleDeleteData();
                         break;
                     }
                     case "4":
                     {
+                        Console.Clear();
                         MenuData.HandleListData();
                         break;
                     }
                     case "5":
+                        Console.Clear();
                         System.Console.WriteLine("Exiting program");
                         return;
 
                     default:
+                        Console.Clear();
                         System.Console.WriteLine("Oops... A problem occured");
                         break;
                 }

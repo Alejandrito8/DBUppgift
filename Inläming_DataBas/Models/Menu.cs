@@ -13,32 +13,37 @@ public class MenuData
             System.Console.WriteLine("2. Add a book");
             System.Console.WriteLine("3. Add a bookloan");
             System.Console.WriteLine("4. Go back to main menu");
-            var input = Console.ReadLine();
+            var input = Console.ReadLine()?.Trim().ToLower();
             {
                 switch (input)
                 {
                     case "1":
                         {
+                            Console.Clear(); 
                             AddData.CreateAuthor();
                             break;
                         }
                     case "2":
                         {
+                            Console.Clear(); 
                             AddData.CreateBook();
                             break;
                         }
                     case "3":
                         {
+                            Console.Clear(); 
                             AddData.CreateBookloan();
                             break;
                         }
                     case "4":
                         {
+                            Console.Clear();
                             System.Console.WriteLine("Exiting program");
                             return;
                         }
                     default:
                         {
+                            Console.Clear(); 
                             System.Console.WriteLine("Oops... A problem occured"); break;
                         }
                 }
@@ -54,25 +59,29 @@ public class MenuData
             System.Console.WriteLine("1. Update Book & Author relation");
             System.Console.WriteLine("2. Update Bookloan & Borrower");
             System.Console.WriteLine("3. Go back to main menu");
-            var input = Console.ReadLine();
+            var input = Console.ReadLine()?.Trim().ToLower();
             switch (input)
             {
                 case "1":
                     {
+                        Console.Clear();
                         UppdateData.BookAuthorRelation();
                         break;
                     }
                 case "2":
                     {
+                        Console.Clear();
                         UppdateData.BookLoan();
                         break;
                     }
                 case "3":
                     {
+                        Console.Clear();
                         System.Console.WriteLine("Exiting program");
                         return;
                     }
                 default:
+                    Console.Clear();
                     System.Console.WriteLine("Oops... A problem occured");
                     break;
             }
@@ -87,31 +96,36 @@ public class MenuData
         System.Console.WriteLine("2. Delete Book");
         System.Console.WriteLine("3. Delete bookloan");
         System.Console.WriteLine("4. Go back to main menu");
-        var input = Console.ReadLine();
+        var input = Console.ReadLine()?.Trim().ToLower();
         {
             switch (input)
             {
                 case "1":
                     {
+                        Console.Clear();
                         DeleteData.DeleteAuthor();
                         break;
                     }
                 case "2":
                     {
+                        Console.Clear();
                         DeleteData.DeleteBook();
                         break;
                     }
                 case "3":
                     {
+                        Console.Clear();
                         DeleteData.DeleteBookloan();
                         break;
                     }
                 case "4":
                     {
+                        Console.Clear();
                         System.Console.WriteLine("Exiting program");
                         return;
                     }
                 default:
+                    Console.Clear();
                     System.Console.WriteLine("Oops... A problem occured");
                     break;
             }
@@ -128,36 +142,42 @@ public class MenuData
             System.Console.WriteLine("3. List books by one author");
             System.Console.WriteLine("4. List every author for one book");
             System.Console.WriteLine("5. Go back to main menu");
-            var input = Console.ReadLine();
+            var input = Console.ReadLine()?.Trim().ToLower();
 
             switch (input)
             {
                 case "1":
                     {
+                        Console.Clear();
                         ListData.ListBooksAndAuthors();
                         break;
                     }
                 case "2":
                     {
+                        Console.Clear();
                         ListData.ListLoanedBooks();
                         break;
                     }
                 case "3":
                     {
+                        Console.Clear();
                         ListData.ListBooksByAuthor();
                         break;
                     }
                 case "4":
                     {
+                        Console.Clear();
                         ListData.ListAuthorsForBook();
                         break;
                     }
                 case "5":
                     {
+                        Console.Clear();
                         System.Console.WriteLine("Exiting program");
                         return;
                     }
                 default:
+                    Console.Clear();
                     System.Console.WriteLine("Oops... A problem occured");
                     break;
             }

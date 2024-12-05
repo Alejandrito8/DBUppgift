@@ -12,7 +12,7 @@ public class UppdateData
                 using (var transaction = context.Database.BeginTransaction())
                 {
                     System.Console.WriteLine("Enter the title of the book");
-                    string title = Console.ReadLine();
+                    string title = Console.ReadLine()?.Trim().ToLower();
                     if (string.IsNullOrWhiteSpace(title))
                     {
                         throw new ArgumentException("Title cannot be empty");
@@ -24,13 +24,13 @@ public class UppdateData
                         return;
                     }
                     System.Console.WriteLine("Enter the first name for the author");
-                    string firstName = Console.ReadLine();
+                    string firstName = Console.ReadLine()?.Trim().ToLower();
                     if (string.IsNullOrWhiteSpace(firstName))
                     {
                         throw new ArgumentException("First name cannot be empty");
                     }
                     Console.WriteLine("Enter the last name of the author");
-                    string lastName = Console.ReadLine();
+                    string lastName = Console.ReadLine()?.Trim().ToLower();
                     if (string.IsNullOrWhiteSpace(lastName))
                     {
                         throw new ArgumentException("Last name cannot be empty");
@@ -72,21 +72,21 @@ public class UppdateData
             using (var context = new AppDbContext())
             {
                 Console.WriteLine("Enter the first name of the borrower:");
-                string borrowerFirstName = Console.ReadLine();
+                string borrowerFirstName = Console.ReadLine()?.Trim().ToLower();
 
                 if (string.IsNullOrWhiteSpace(borrowerFirstName))
                 {
                     throw new ArgumentException("First name cannot be empty");
                 }
                 Console.WriteLine("Enter the last name of the borrower:");
-                string borrowerLastName = Console.ReadLine();
+                string borrowerLastName = Console.ReadLine()?.Trim().ToLower();
 
                 if (string.IsNullOrWhiteSpace(borrowerLastName))
                 {
                     throw new ArgumentException("Last name cannot be empty");
                 }
                 Console.WriteLine("Enter the name of the book to borrow:");
-                string bookName = Console.ReadLine();
+                string bookName = Console.ReadLine()?.Trim().ToLower();
 
                 if (string.IsNullOrWhiteSpace(bookName))
                 {
@@ -125,7 +125,7 @@ public class UppdateData
                 context.Loans.Add(loan);
                 context.SaveChanges();
 
-                Console.WriteLine($"Book '{book.Title}' has been loaned from {loanDate.ToShortDateString()} to {returnDate.ToShortDateString()}.");
+                Console.WriteLine($"Book '{book.Title}' has been loaned to {borrowerFirstName} {borrowerLastName} from {loanDate.ToShortDateString()} to {returnDate.ToShortDateString()}.");
             }
         }
         catch (Exception ex)

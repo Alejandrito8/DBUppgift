@@ -6,7 +6,7 @@ public class ListData
     {
         using (var context = new AppDbContext())
         {
-
+Console.ReadLine()?.Trim().ToLower();
         }
     }
     public static void ListLoanedBooks()
