@@ -32,9 +32,8 @@ public class ListData
                 }
                 else
                 {
-                    Console.WriteLine("No books and authors found.");
+                    Console.WriteLine("No books and authors found");
                 }
-
             }
             catch (Exception ex)
             {
@@ -68,18 +67,17 @@ public class ListData
             }
             else
             {
-                Console.WriteLine("No loaned books found.");
+                Console.WriteLine("No loaned books found");
             }
         }
     }
-
     public static void ListBooksByAuthor()
     {
         using (var context = new AppDbContext())
         {
-            Console.WriteLine("Enter the first name of the author:");
+            Console.WriteLine("Enter the first name of the author you want to list books from:");
             string firstName = Console.ReadLine().ToLower();
-            Console.WriteLine("Enter the last name of the author:");
+            Console.WriteLine("Enter the last name of the author you want to list books from:");
             string lastName = Console.ReadLine().ToLower();
 
             var books = context.BookAuthors
@@ -91,7 +89,7 @@ public class ListData
 
             if (books.Any())
             {
-                Console.WriteLine($"Books by {firstName} {lastName}:");
+                Console.WriteLine($"Books by '{firstName} {lastName}':");
                 foreach (var book in books)
                 {
                     Console.WriteLine(book);
@@ -99,7 +97,7 @@ public class ListData
             }
             else
             {
-                Console.WriteLine($"No books found for author {firstName} {lastName}.");
+                Console.WriteLine($"No books found for author: {firstName} {lastName}");
             }
         }
     }
@@ -108,7 +106,7 @@ public class ListData
     {
         using (var context = new AppDbContext())
         {
-            Console.WriteLine("Enter the title of the book:");
+            Console.WriteLine("Enter the title of the book you want to list the authors for:");
             string bookTitle = Console.ReadLine().ToLower();
 
             var authors = context.BookAuthors
@@ -128,7 +126,7 @@ public class ListData
             }
             else
             {
-                Console.WriteLine($"No authors found for the book '{bookTitle}'.");
+                Console.WriteLine($"No authors found for the book '{bookTitle}'");
             }
         }
     }

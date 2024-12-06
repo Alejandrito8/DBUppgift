@@ -59,7 +59,7 @@ public class MenuData
             System.Console.WriteLine("1. Update Book & Author relation");
             System.Console.WriteLine("2. Update Bookloan & Borrower");
             System.Console.WriteLine("3. Go back to main menu");
-            var input = Console.ReadLine().ToLower();
+            var input = Console.ReadLine();
             switch (input)
             {
                 case "1":
@@ -97,7 +97,7 @@ public class MenuData
         System.Console.WriteLine("2. Delete Book");
         System.Console.WriteLine("3. Delete bookloan");
         System.Console.WriteLine("4. Go back to main menu");
-        var input = Console.ReadLine().ToLower();
+        var input = Console.ReadLine();
         
             switch (input)
             {
@@ -143,7 +143,7 @@ public class MenuData
             System.Console.WriteLine("3. List books by one author");
             System.Console.WriteLine("4. List every author for one book");
             System.Console.WriteLine("5. Go back to main menu");
-            var input = Console.ReadLine().ToLower();
+            var input = Console.ReadLine();
 
             switch (input)
             {

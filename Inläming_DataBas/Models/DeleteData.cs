@@ -22,10 +22,10 @@ public class DeleteData
                 }
                 var author = context.Authors
                 .FirstOrDefault(a => a.FirstName.ToLower() == firstName && a.LastName.ToLower() == lastName);
-
+                
                 if (author == null)
                 {
-                    Console.WriteLine($"Invalid input. Try again");
+                    Console.WriteLine($"The author does not exist in the database");
                     return;
                 }
 
@@ -44,7 +44,7 @@ public class DeleteData
                 }
                 else
                 {
-                    Console.WriteLine("Deletion canceled, please answer: 'yes' or 'no'.");
+                    Console.WriteLine("Deletion canceled, please answer: 'yes' or 'no' when asked if you want to delete the selected author");
                 }
             }
             catch (Exception ex)
@@ -69,7 +69,7 @@ public class DeleteData
 
                 if (book == null)
                 {
-                    Console.WriteLine($"Invalid input. Try again");
+                    Console.WriteLine($"The book does not exist in the database");
                     return;
                 }
 
@@ -80,7 +80,7 @@ public class DeleteData
                 {
                     context.Books.Remove(book);
                     context.SaveChanges();
-                    Console.WriteLine($"Book {book.Title} has been deleted from the database.");
+                    Console.WriteLine($"Book {book.Title} has been deleted from the database");
                 }
                 else if (confirmation == "no")
                 {
@@ -88,7 +88,7 @@ public class DeleteData
                 }
                 else
                 {
-                    Console.WriteLine("Deletion canceled, please answer: 'yes' or 'no'.");
+                    Console.WriteLine("Deletion canceled, please answer: 'yes' or 'no' when asked if you want to delete the selected author");
                 }
             }
             catch (Exception ex)
@@ -115,7 +115,7 @@ public class DeleteData
 
                 if (loan == null)
                 {
-                    Console.WriteLine($"Invalid input. Try again");
+                    Console.WriteLine($"The loan does not exist in the database");
                     return;
                 }
 
@@ -126,7 +126,7 @@ public class DeleteData
                 {
                     context.Loans.Remove(loan);
                     context.SaveChanges();
-                    Console.WriteLine($"Loan with ID '{loanId}' and title '{loan.Book.Title}'  has been deleted from the database.");
+                    Console.WriteLine($"Loan with ID '{loanId}' and title '{loan.Book.Title}' has been deleted from the database.");
                 }
                 else if (confirmation == "no")
                 {
@@ -134,7 +134,7 @@ public class DeleteData
                 }
                 else
                 {
-                    Console.WriteLine("Deletion canceled, please answer: 'yes' or 'no'.");
+                    Console.WriteLine("Deletion canceled, please answer: 'yes' or 'no' when asked if you want to delete the selected author");
                 }
             }
             catch (Exception ex)

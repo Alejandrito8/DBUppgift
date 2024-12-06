@@ -11,7 +11,7 @@ public class UppdateData
             {
                 using (var transaction = context.Database.BeginTransaction())
                 {
-                    System.Console.WriteLine("Enter the title of the book");
+                    System.Console.WriteLine("Enter the current title of the book");
                     string title = Console.ReadLine().ToLower();
                     if (string.IsNullOrWhiteSpace(title))
                     {
@@ -20,16 +20,16 @@ public class UppdateData
                     var book = context.Books.FirstOrDefault(b => b.Title.ToLower() == title.ToLower());
                     if (book == null)
                     {
-                        Console.WriteLine($"No book found with the title '{title}', but you can add it to the collection under 'add data' in the menu.");
+                        Console.WriteLine("The book does not exist in the database");
                         return;
                     }
-                    System.Console.WriteLine("Enter the first name for the author");
+                    System.Console.WriteLine("Enter the first name for the current author");
                     string firstName = Console.ReadLine().ToLower();
                     if (string.IsNullOrWhiteSpace(firstName))
                     {
                         throw new ArgumentException("First name cannot be empty");
                     }
-                    Console.WriteLine("Enter the last name of the author");
+                    Console.WriteLine("Enter the last name of the current author");
                     string lastName = Console.ReadLine().ToLower();
                     if (string.IsNullOrWhiteSpace(lastName))
                     {
@@ -40,30 +40,43 @@ public class UppdateData
                                              a.LastName.ToLower() == lastName.ToLower());
                     if (author == null)
                     {
-                        Console.WriteLine($"No author found with the name '{firstName}' '{lastName}', but you can add the new author to the collection under 'add data' in the menu.");
+                        Console.WriteLine("The author does not exist in the database");
                         return;
                     }
+                    var existingRelation = context.BookAuthors
+                    .FirstOrDefault(ba => ba.BookID == book.ID && ba.AuthorID == author.ID);
 
-                    var bookAuthor = new BookAuthor
+                    if (existingRelation == null)
                     {
-                        Book = book,
-                        Author = author,
-                        BookID = book.ID,
-                        AuthorID = author.ID
-                    };
+                        Console.WriteLine($"No relation found between the book '{title}' and author '{firstName} {lastName}'");
+                        return;
+                    }
+                    Console.WriteLine("Enter the new title of the book");
+                    string newTitle = Console.ReadLine().ToLower();
+                    if (!string.IsNullOrWhiteSpace(newTitle))
+                    {
+                        book.Title = newTitle;
+                    }
 
-                    context.BookAuthors.Add(bookAuthor);
+                    Console.WriteLine("Enter the new first name of the author");
+                    string newFirstName = Console.ReadLine().ToLower();
+                    if (!string.IsNullOrWhiteSpace(newFirstName))
+                    {
+                        author.FirstName = newFirstName;
+                    }
+
+                    Console.WriteLine("Enter the new last name of the author");
+                    string newLastName = Console.ReadLine().ToLower();
+                    if (!string.IsNullOrWhiteSpace(newLastName))
+                    {
+                        author.LastName = newLastName;
+                    }
+
                     context.SaveChanges();
-
-                    Console.WriteLine($"Book with ID {book.ID} and Author with ID {author.ID} have been linked.");
-                    transaction.Commit();
+                    Console.WriteLine($"The book '{book.Title}'with ID {book.ID} and the author '{author.FirstName} {author.LastName}' with ID {author.ID} have been linked");
                 }
             }
         }
-            catch (DbUpdateException ex)
-    {
-        Console.WriteLine($"Error: {ex.InnerException?.Message ?? ex.Message}");
-    }
         catch (Exception ex)
         {
             Console.WriteLine($"Error: {ex.Message}");
@@ -75,61 +88,49 @@ public class UppdateData
         {
             using (var context = new AppDbContext())
             {
-                Console.WriteLine("Enter the first name of the borrower:");
-                string borrowerFirstName = Console.ReadLine().ToLower();
-
-                if (string.IsNullOrWhiteSpace(borrowerFirstName))
+                Console.WriteLine("Enter the ID of the loan you want to update:");
+                if (!int.TryParse(Console.ReadLine(), out int loanId))
                 {
-                    throw new ArgumentException("First name cannot be empty");
-                }
-                Console.WriteLine("Enter the last name of the borrower:");
-                string borrowerLastName = Console.ReadLine().ToLower();
-
-                if (string.IsNullOrWhiteSpace(borrowerLastName))
-                {
-                    throw new ArgumentException("Last name cannot be empty");
-                }
-                Console.WriteLine("Enter the name of the book to borrow:");
-                string bookName = Console.ReadLine().ToLower();
-
-                if (string.IsNullOrWhiteSpace(bookName))
-                {
-                    throw new ArgumentException("book title cannot be empty");
+                    throw new ArgumentException("Invalid loan ID");
                 }
 
-                Console.WriteLine("Enter the loan start date (YYYY-MM-DD):");
-                if (!DateTime.TryParse(Console.ReadLine(), out DateTime loanDate))
+                var loan = context.Loans.Include(l => l.Book).FirstOrDefault(l => l.ID == loanId);
+                if (loan == null)
                 {
-                    throw new ArgumentException("Invalid date format. Please use yyyy-mm-dd");
-                }
-
-                Console.WriteLine("Enter the loan return date (YYYY-MM-DD):");
-                if (!DateTime.TryParse(Console.ReadLine(), out DateTime returnDate))
-                {
-                    throw new ArgumentException("Invalid date format. Please use yyyy-mm-dd");
-                }
-                var book = context.Books
-         .FirstOrDefault(b => b.Title.ToLower() == bookName.ToLower());
-
-                if (book == null)
-                {
-                    Console.WriteLine($"No book found with the title '{bookName}', but you can add it to the collection under 'add data' in the menu.");
+                    Console.WriteLine($"The loan Id does not exist in the database");
                     return;
                 }
-
-                var loan = new Loan
+                Console.WriteLine("Current Loan Details:");
+                Console.WriteLine($"Loan ID: {loan.ID}, Book: {loan.Book.Title}, Borrower:{loan.BorrowerFirstName} {loan.BorrowerLastName} \n Loan Date: {loan.LoanDate.ToShortDateString()}, Return Date: {loan.ReturnDate}");
+                
+                Console.WriteLine("Enter the new borrower's last name (or leave blank to keep the current)");
+                string newFirstName = Console.ReadLine()?.ToLower();
+                if (!string.IsNullOrWhiteSpace(newFirstName))
                 {
-                    BorrowerFirstName = borrowerFirstName,
-                    BorrowerLastName = borrowerLastName,
-                    BookID = book.ID,
-                    LoanDate = loanDate,
-                    ReturnDate = returnDate
-                };
+                    loan.BorrowerFirstName = newFirstName;
+                }
+                Console.WriteLine("Enter the new borrower's last name (or leave blank to keep the current)");
+                string newLastName = Console.ReadLine()?.Trim();
+                if (!string.IsNullOrWhiteSpace(newLastName))
+                {
+                    loan.BorrowerLastName = newLastName;
+                }
 
-                context.Loans.Add(loan);
+                Console.WriteLine("Enter the new loan start date (YYYY-MM-DD) (or leave blank to keep the current)");
+                string newLoanDateInput = Console.ReadLine()?.Trim();
+                if (!string.IsNullOrWhiteSpace(newLoanDateInput) && DateTime.TryParse(newLoanDateInput, out DateTime newLoanDate))
+                {
+                    loan.LoanDate = newLoanDate;
+                }
+
+                Console.WriteLine("Enter the new return date (YYYY-MM-DD) (or leave blank to keep the current)");
+                string newReturnDateInput = Console.ReadLine()?.Trim();
+                if (!string.IsNullOrWhiteSpace(newReturnDateInput) && DateTime.TryParse(newReturnDateInput, out DateTime newReturnDate))
+                {
+                    loan.ReturnDate = newReturnDate;
+                }
                 context.SaveChanges();
-
-                Console.WriteLine($"Book '{book.Title}' has been loaned to {borrowerFirstName} {borrowerLastName} from {loanDate.ToShortDateString()} to {returnDate.ToShortDateString()}.");
+                Console.WriteLine("Loan updated successfully");
             }
         }
         catch (Exception ex)

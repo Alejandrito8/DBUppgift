@@ -10,13 +10,13 @@ public class AddData
             try
             {
                 System.Console.WriteLine("Enter the first name for the author");
-                string firstName = Console.ReadLine();
+                string firstName = Console.ReadLine().ToLower();
                 if (string.IsNullOrWhiteSpace(firstName))
                 {
                     throw new ArgumentException("First name cannot be empty");
                 }
                 Console.WriteLine("Enter the last name of the author");
-                string lastName = Console.ReadLine();
+                string lastName = Console.ReadLine().ToLower();
                 if (string.IsNullOrWhiteSpace(lastName))
                 {
                     throw new ArgumentException("Last name cannot be empty");
@@ -35,7 +35,7 @@ public class AddData
                 };
                 context.Authors.Add(author);
                 context.SaveChanges();
-                Console.WriteLine($"Author {firstName} {lastName} born {dateOfBirth} has been added");
+                Console.WriteLine($"Author {firstName} {lastName} born {dateOfBirth} has been added to the database");
             }
 
             catch (Exception ex)
@@ -75,7 +75,7 @@ public class AddData
                 };
                 context.Books.Add(book);
                 context.SaveChanges();
-                Console.WriteLine($"Book with the title {title} published in {publicationYear} with the genre {genre} has been added.");
+                Console.WriteLine($"Book with the title {title} published in {publicationYear} with the genre {genre} has been added to the database");
             }
             catch (Exception ex)
             {
@@ -103,17 +103,17 @@ public class AddData
                 {
                     throw new ArgumentException("Last name cannot be empty");
                 }
-                Console.WriteLine("Enter the name of the book to borrow:");
+                Console.WriteLine("Enter the title of the book to borrow:");
                 string bookTitle = Console.ReadLine().ToLower();
 
                 if (string.IsNullOrWhiteSpace(bookTitle))
                 {
-                    throw new ArgumentException("book title cannot be empty");
+                    throw new ArgumentException("Title cannot be empty");
                 }
                 var book = context.Books.FirstOrDefault(b => b.Title.ToLower() == bookTitle.ToLower());
                 if (book == null)
                 {
-                    Console.WriteLine($"The book '{bookTitle}' does not exist in the database.");
+                    Console.WriteLine($"Book title cannot be empty");
                     return;
                 }
                 Console.WriteLine("Enter the loan start date (YYYY-MM-DD):");
@@ -126,6 +126,10 @@ public class AddData
                 if (!DateTime.TryParse(Console.ReadLine(), out DateTime returnDate))
                 {
                     throw new ArgumentException("Invalid date format. Please use yyyy-mm-dd");
+                }
+                if (loanDate > returnDate)
+                {
+                    System.Console.WriteLine("Start date cannot be after return date");
                 }
                 var loan = new Loan
                 {
