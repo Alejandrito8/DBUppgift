@@ -18,7 +18,7 @@ class Program
                 System.Console.WriteLine("3. Delete Data");
                 System.Console.WriteLine("4. List Data");
                 System.Console.WriteLine("5. Quit");
-                var input = Console.ReadLine()?.Trim().ToLower();
+                var input = Console.ReadLine().ToLower();
                 switch (input)
                 {
                     case "1":

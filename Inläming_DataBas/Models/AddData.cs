@@ -10,13 +10,13 @@ public class AddData
             try
             {
                 System.Console.WriteLine("Enter the first name for the author");
-                string firstName = Console.ReadLine()?.Trim().ToLower();
+                string firstName = Console.ReadLine();
                 if (string.IsNullOrWhiteSpace(firstName))
                 {
                     throw new ArgumentException("First name cannot be empty");
                 }
                 Console.WriteLine("Enter the last name of the author");
-                string lastName = Console.ReadLine()?.Trim().ToLower();
+                string lastName = Console.ReadLine();
                 if (string.IsNullOrWhiteSpace(lastName))
                 {
                     throw new ArgumentException("Last name cannot be empty");
@@ -37,6 +37,7 @@ public class AddData
                 context.SaveChanges();
                 Console.WriteLine($"Author {firstName} {lastName} born {dateOfBirth} has been added");
             }
+
             catch (Exception ex)
             {
                 Console.WriteLine($"Error: {ex.Message}");
@@ -50,13 +51,13 @@ public class AddData
             try
             {
                 System.Console.WriteLine("Enter the title of the book");
-                string title = Console.ReadLine()?.Trim().ToLower();
+                string title = Console.ReadLine().ToLower();
                 if (string.IsNullOrWhiteSpace(title))
                 {
                     throw new ArgumentException("Title cannot be empty");
                 }
                 Console.WriteLine("Enter the genre of the book");
-                string genre = Console.ReadLine()?.Trim().ToLower();
+                string genre = Console.ReadLine().ToLower();
                 if (string.IsNullOrWhiteSpace(genre))
                 {
                     throw new ArgumentException("Genre cannot be empty");
@@ -89,27 +90,32 @@ public class AddData
             using (var context = new AppDbContext())
             {
                 Console.WriteLine("Enter the first name of the borrower:");
-                string borrowerFirstName = Console.ReadLine()?.Trim().ToLower();
+                string borrowerFirstName = Console.ReadLine().ToLower();
 
                 if (string.IsNullOrWhiteSpace(borrowerFirstName))
                 {
                     throw new ArgumentException("First name cannot be empty");
                 }
                 Console.WriteLine("Enter the last name of the borrower:");
-                string borrowerLastName = Console.ReadLine()?.Trim().ToLower();
+                string borrowerLastName = Console.ReadLine().ToLower();
 
                 if (string.IsNullOrWhiteSpace(borrowerLastName))
                 {
                     throw new ArgumentException("Last name cannot be empty");
                 }
                 Console.WriteLine("Enter the name of the book to borrow:");
-                string bookName = Console.ReadLine()?.Trim().ToLower();
+                string bookTitle = Console.ReadLine().ToLower();
 
-                if (string.IsNullOrWhiteSpace(bookName))
+                if (string.IsNullOrWhiteSpace(bookTitle))
                 {
                     throw new ArgumentException("book title cannot be empty");
                 }
-
+                var book = context.Books.FirstOrDefault(b => b.Title.ToLower() == bookTitle.ToLower());
+                if (book == null)
+                {
+                    Console.WriteLine($"The book '{bookTitle}' does not exist in the database.");
+                    return;
+                }
                 Console.WriteLine("Enter the loan start date (YYYY-MM-DD):");
                 if (!DateTime.TryParse(Console.ReadLine(), out DateTime loanDate))
                 {
@@ -125,14 +131,14 @@ public class AddData
                 {
                     BorrowerFirstName = borrowerFirstName,
                     BorrowerLastName = borrowerLastName,
+                    BookID = book.ID,
                     LoanDate = loanDate,
                     ReturnDate = returnDate
                 };
 
                 context.Loans.Add(loan);
                 context.SaveChanges();
-
-                Console.WriteLine($"Book '{bookName}' has been loaned to {borrowerFirstName} {borrowerLastName} from {loanDate.ToShortDateString()} to {returnDate.ToShortDateString()}.");
+                Console.WriteLine($"Loan ID: {loan.ID} - Book '{bookTitle}' has been loaned to {borrowerFirstName} {borrowerLastName} from {loanDate.ToShortDateString()} to {returnDate.ToShortDateString()}.");
             }
         }
         catch (Exception ex)

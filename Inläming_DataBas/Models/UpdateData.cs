@@ -12,7 +12,7 @@ public class UppdateData
                 using (var transaction = context.Database.BeginTransaction())
                 {
                     System.Console.WriteLine("Enter the title of the book");
-                    string title = Console.ReadLine()?.Trim().ToLower();
+                    string title = Console.ReadLine().ToLower();
                     if (string.IsNullOrWhiteSpace(title))
                     {
                         throw new ArgumentException("Title cannot be empty");
@@ -24,13 +24,13 @@ public class UppdateData
                         return;
                     }
                     System.Console.WriteLine("Enter the first name for the author");
-                    string firstName = Console.ReadLine()?.Trim().ToLower();
+                    string firstName = Console.ReadLine().ToLower();
                     if (string.IsNullOrWhiteSpace(firstName))
                     {
                         throw new ArgumentException("First name cannot be empty");
                     }
                     Console.WriteLine("Enter the last name of the author");
-                    string lastName = Console.ReadLine()?.Trim().ToLower();
+                    string lastName = Console.ReadLine().ToLower();
                     if (string.IsNullOrWhiteSpace(lastName))
                     {
                         throw new ArgumentException("Last name cannot be empty");
@@ -38,7 +38,7 @@ public class UppdateData
                     var author = context.Authors
                         .FirstOrDefault(a => a.FirstName.ToLower() == firstName.ToLower() &&
                                              a.LastName.ToLower() == lastName.ToLower());
-                    if (book == null)
+                    if (author == null)
                     {
                         Console.WriteLine($"No author found with the name '{firstName}' '{lastName}', but you can add the new author to the collection under 'add data' in the menu.");
                         return;
@@ -60,6 +60,10 @@ public class UppdateData
                 }
             }
         }
+            catch (DbUpdateException ex)
+    {
+        Console.WriteLine($"Error: {ex.InnerException?.Message ?? ex.Message}");
+    }
         catch (Exception ex)
         {
             Console.WriteLine($"Error: {ex.Message}");
@@ -72,21 +76,21 @@ public class UppdateData
             using (var context = new AppDbContext())
             {
                 Console.WriteLine("Enter the first name of the borrower:");
-                string borrowerFirstName = Console.ReadLine()?.Trim().ToLower();
+                string borrowerFirstName = Console.ReadLine().ToLower();
 
                 if (string.IsNullOrWhiteSpace(borrowerFirstName))
                 {
                     throw new ArgumentException("First name cannot be empty");
                 }
                 Console.WriteLine("Enter the last name of the borrower:");
-                string borrowerLastName = Console.ReadLine()?.Trim().ToLower();
+                string borrowerLastName = Console.ReadLine().ToLower();
 
                 if (string.IsNullOrWhiteSpace(borrowerLastName))
                 {
                     throw new ArgumentException("Last name cannot be empty");
                 }
                 Console.WriteLine("Enter the name of the book to borrow:");
-                string bookName = Console.ReadLine()?.Trim().ToLower();
+                string bookName = Console.ReadLine().ToLower();
 
                 if (string.IsNullOrWhiteSpace(bookName))
                 {

@@ -9,13 +9,13 @@ public class DeleteData
             try
             {
                 System.Console.WriteLine("Enter the first name for the author you want to delete from the database");
-                string firstName = Console.ReadLine()?.Trim().ToLower();
+                string firstName = Console.ReadLine().ToLower();
                 if (string.IsNullOrWhiteSpace(firstName))
                 {
                     throw new ArgumentException("First name cannot be empty");
                 }
                 Console.WriteLine("Enter the last name of the author you want to delete from the database");
-                string lastName = Console.ReadLine()?.Trim().ToLower();
+                string lastName = Console.ReadLine().ToLower();
                 if (string.IsNullOrWhiteSpace(lastName))
                 {
                     throw new ArgumentException("Last name cannot be empty");
@@ -30,7 +30,7 @@ public class DeleteData
                 }
 
                 Console.WriteLine($"Author found: {author.FirstName} {author.LastName}. Do you want to delete this author? write: 'yes' or 'no'.");
-                string confirmation = Console.ReadLine()?.ToLower();
+                string confirmation = Console.ReadLine().ToLower();
 
                 if (confirmation == "yes")
                 {
@@ -60,7 +60,7 @@ public class DeleteData
             try
             {
                 System.Console.WriteLine("Enter the title of the book you want to delete from the database");
-                string title = Console.ReadLine()?.Trim().ToLower();
+                string title = Console.ReadLine().ToLower();
                 if (string.IsNullOrWhiteSpace(title))
                 {
                     throw new ArgumentException("Book title cannot be empty");
@@ -74,7 +74,7 @@ public class DeleteData
                 }
 
                 Console.WriteLine($"Book found: {book.Title}. Do you want to delete this author? write: 'yes' or 'no'.");
-                string confirmation = Console.ReadLine()?.ToLower();
+                string confirmation = Console.ReadLine().ToLower();
 
                 if (confirmation == "yes")
                 {
@@ -104,7 +104,7 @@ public class DeleteData
             try
             {
                 System.Console.WriteLine("Enter the ID of the book loan you want to delete from the database");
-                string LoanId = Console.ReadLine()?.Trim().ToLower();
+                string LoanId = Console.ReadLine();
                 if (!int.TryParse(LoanId, out int loanId))
                 {
                     throw new ArgumentException("Invalid input. Try again");
@@ -120,7 +120,7 @@ public class DeleteData
                 }
 
                 Console.WriteLine($"Loan found for book: {loan.Book.Title}. Borrowed by {loan.BorrowerFirstName} {loan.BorrowerLastName} on {loan.LoanDate:yyyy-MM-dd}. Due date: {loan.DueDate:yyyy-MM-dd}. Do you want to delete this author? write: 'yes' or 'no'.");
-                string confirmation = Console.ReadLine()?.ToLower();
+                string confirmation = Console.ReadLine().ToLower();
 
                 if (confirmation == "yes")
                 {
